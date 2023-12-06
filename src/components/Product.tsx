@@ -18,7 +18,7 @@ const Product = ({ products }: Item) => {
           key={item._id}
           className="relative bg-white group border-[1px] border-zinc-200 hover:border-zinc-500 duration-300 hover:shadow-xl overflow-hidden"
         >
-          <Link href={"/"}>
+          <Link href={{pathname: `/${item?._id}`, query:{_id:item?._id}}}>
             <Image
               src={item?.image}
               alt="Product image"
@@ -37,7 +37,7 @@ const Product = ({ products }: Item) => {
             </p>
 						<div className="flex items-center justify-between text-sm mt-2" >
             <button className="uppercase font-semibold hover:text-designColor duration-300">Add to cart</button>
-						<Link href={'/'} className="uppercase font-semibold hover:text-designColor duration-300">More info</Link>
+						<Link href={{pathname: `/${item?._id}`, query:{_id:item?._id}}} className="uppercase font-semibold hover:text-designColor duration-300">More info</Link>
 						</div>
           </div>
         </div>
