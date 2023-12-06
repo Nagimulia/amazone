@@ -1,14 +1,20 @@
 import Container from "@/components/Container";
+import ProfileInfo from "@/components/ProfileInfo";
 import Title from "@/components/Title";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
-type Props = {}
+const page = async () => {
+  const session = await getServerSession();
+  if (!session || !session.user) {
+    redirect("/");
+  }
+  return (
+    <Container>
+      <Title title="Profile Information" />
+      <ProfileInfo />
+    </Container>
+  );
+};
 
-const page = (props: Props) => {
-	return (
-		<Container>
-			<Title title="Profile Information"/>
-		</Container>
-	)
-}
-
-export default page
+export default page;

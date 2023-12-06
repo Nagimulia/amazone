@@ -77,7 +77,7 @@ const Banner = () => {
 					<Image
 						src={sliderOne}
 						alt="sliderone"
-						className="absolute object-cover right-0 lg:-right-48 lg:h-screen"
+						className="absolute object-contain right-0 lg:-right-48 lg:h-screen"
 						priority
 					/>
 				</div>
@@ -98,7 +98,7 @@ const Banner = () => {
 					<Image
 						src={sliderTwo}
 						alt="sliderTwo"
-						className="absolute object-cover right-0 lg:-right-48 h-full"
+						className="absolute object-contain  right-0 lg:-right-48 h-full"
 						loading="lazy"
 					/>
 				</div>
@@ -119,7 +119,7 @@ const Banner = () => {
 					<Image
 						src={sliderThree}
 						alt="sliderThree"
-						className="absolute object-cover right-0 lg:-right-80 h-full"
+						className="absolute object-contain  right-0 lg:-right-60 h-full"
 						loading="lazy"
 					/>
 				</div>
