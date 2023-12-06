@@ -5,11 +5,13 @@ import Logo from "./Logo";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { navigation } from "@/constants/data";
+import { signIn, useSession } from "next-auth/react";
 interface Props {}
 
 const Navbar = (props: Props) => {
   const pathname = usePathname();
- 
+  const { data: session } = useSession();
+
   return (
     <div className="w-full h-20 border-b-[1px] border-zinc-500 bg-white text-zinc-600 sticky top-0 z-50 bg-white/80 backdrop-blur-2xl">
       <div className="max-w-screen-xl mx-auto h-full flex items-center justify-between px-4 xl:px-0">
@@ -51,10 +53,22 @@ const Navbar = (props: Props) => {
               8
             </span>
           </Link>
-          <button className="hover:text-black cursor-pointer duration-200 relative overflow-hidden group text-sm uppercase font-semibold">
-            Login
+					{
+						session ?
+          <Link href={'/profile'}
+            className="hover:text-black cursor-pointer duration-200 relative overflow-hidden group text-sm uppercase font-semibold"
+          >
+            Profile
             <span className="absolute h-[1px] w-full bg-blue-700 left-0 bottom-0 -translate-x-[100%] group-hover:translate-x-0 transition-transform duration-500" />
-          </button>
+          </Link> : 
+					<button
+					onClick={() => signIn()}
+					className="hover:text-black cursor-pointer duration-200 relative overflow-hidden group text-sm uppercase font-semibold"
+				>
+					Login
+					<span className="absolute h-[1px] w-full bg-blue-700 left-0 bottom-0 -translate-x-[100%] group-hover:translate-x-0 transition-transform duration-500" />
+				</button>
+					}
         </div>
       </div>
     </div>
