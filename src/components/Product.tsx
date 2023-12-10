@@ -5,12 +5,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { Heart } from "lucide-react";
 import FormatterPrice from "./FormatterPrice";
+import { useDispatch } from "react-redux";
+import { addToCart } from "@/redux/proSlice";
 
 interface Item {
   products: ProductType[];
 }
 
 const Product = ({ products }: Item) => {
+  const dispatch = useDispatch();
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mt-10">
       {products.map((item) => (
@@ -18,7 +21,7 @@ const Product = ({ products }: Item) => {
           key={item._id}
           className="relative bg-white group border-[1px] border-zinc-200 hover:border-zinc-500 duration-300 hover:shadow-xl overflow-hidden"
         >
-          <Link href={{pathname: `/${item?._id}`, query:{_id:item?._id}}}>
+          <Link href={{ pathname: `/${item?._id}`, query: { _id: item?._id } }}>
             <Image
               src={item?.image}
               alt="Product image"
@@ -35,10 +38,20 @@ const Product = ({ products }: Item) => {
             <p className="font-semibold">
               <FormatterPrice amount={item?.price} />
             </p>
-						<div className="flex items-center justify-between text-sm mt-2" >
-            <button className="uppercase font-semibold hover:text-designColor duration-300">Add to cart</button>
-						<Link href={{pathname: `/${item?._id}`, query:{_id:item?._id}}} className="uppercase font-semibold hover:text-designColor duration-300">More info</Link>
-						</div>
+            <div className="flex items-center justify-between text-sm mt-2">
+              <button
+                onClick={() => dispatch(addToCart(item))}
+                className="uppercase font-semibold hover:text-designColor duration-300"
+              >
+                Add to cart
+              </button>
+              <Link
+                href={{ pathname: `/${item?._id}`, query: { _id: item?._id } }}
+                className="uppercase font-semibold hover:text-designColor duration-300"
+              >
+                More info
+              </Link>
+            </div>
           </div>
         </div>
       ))}
